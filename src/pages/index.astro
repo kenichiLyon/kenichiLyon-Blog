@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sitePath } from "../lib/posts";
+---
+
+<BaseLayout title="Kenichi Lyon Blog">
+  <main>
+    <section class="home-hero" aria-label="Intro">
+      <img src={sitePath("/images/home-hero-sci-fi.png")} alt="Futuristic AI operations command room" />
+      <div class="home-hero__overlay"></div>
+      <div class="home-hero__content">
+        <p class="eyebrow">Intro</p>
+        <h1>kenichiLyon</h1>
+        <p class="signal">don't want to be the bébé, you know i'm sick of lying</p>
+        <nav class="hero-actions" aria-label="Home actions">
+          <a href={sitePath("/directory/")}>Directory</a>
+          <a href={sitePath("/posts/")}>Posts</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="profile-grid" aria-label="Profile">
+      <article class="profile-panel">
+        <p class="eyebrow">About Me</p>
+        <dl>
+          <div>
+            <dt>Name</dt>
+            <dd>kenichiLyon/ 顾子深 (Tzushin Gu)</dd>
+          </div>
+          <div>
+            <dt>Major</dt>
+            <dd>人工智能技术应用/计算机网络技术</dd>
+          </div>
+          <div>
+            <dt>Birth</dt>
+            <dd>2004.08 - Virgo</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="profile-panel">
+        <p class="eyebrow">About My Coding</p>
+        <dl>
+          <div>
+            <dt>Major Language</dt>
+            <dd>Golang, Python, Typescript</dd>
+          </div>
+          <div>
+            <dt>Focus</dt>
+            <dd>AIOps, AI SRE, Product Manage</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="profile-panel project-panel">
+        <p class="eyebrow">Acadamic Project</p>
+        <h2>CloudTraceHub</h2>
+        <p>A AI Agentic Util work for Auto DevOps + AI</p>
+      </article>
+    </section>
+  </main>
+</BaseLayout>

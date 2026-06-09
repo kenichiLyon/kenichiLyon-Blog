@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+import { sitePath } from "../lib/posts";
+
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href={sitePath("/")}>Kenichi Lyon Blog</a>
+        <nav class="top-nav" aria-label="Primary">
+          <a href={sitePath("/")}>Intro</a>
+          <a href={sitePath("/directory/")}>Directory</a>
+          <a href={sitePath("/posts/")}>Posts</a>
+        </nav>
+      </header>
+      <slot />
+    </div>
+  </body>
+</html>

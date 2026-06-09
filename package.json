@@ -1,0 +1,24 @@
+{
+  "name": "kenichilyon-blog",
+  "version": "1.0.0",
+  "description": "Astro static blog for Kenichi Lyon writing.",
+  "scripts": {
+    "migrate:content": "node scripts/migrate-content.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "astro": "^6.4.4",
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9"
+  }
+}

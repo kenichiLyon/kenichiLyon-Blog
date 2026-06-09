@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildDirectoryTree, formatDate, postUrl, renderDirectoryTree, sortPosts } from "../lib/posts";
+
+const posts = sortPosts(await getCollection("blog", ({ data }) => !data.draft));
+const directory = buildDirectoryTree(posts);
+const directoryHtml = renderDirectoryTree(directory);
+---
+
+<BaseLayout title="Directory | Kenichi Lyon Blog">
+  <main class="index-layout">
+    <aside class="directory">
+      <h1>目录</h1>
+      <Fragment set:html={directoryHtml} />
+    </aside>
+
+    <section class="post-list">
+      <div class="section-heading">
+        <p class="eyebrow">Archive matrix</p>
+        <h1>文章</h1>
+      </div>
+      {
+        posts.map((post) => (
+          <article class="post-card">
+            <div class="order">{String(post.data.order).padStart(2, "0")}</div>
+            <div>
+              <h2>
+                <a href={postUrl(post)}>{post.data.title}</a>
+              </h2>
+              <p class="meta">
+                {formatDate(post.data.date)} · {post.data.author}
+                {post.data.series ? ` · ${post.data.series}` : ""}
+              </p>
+              <p class="path">{post.data.source}</p>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+</BaseLayout>

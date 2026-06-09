@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, postUrl, sortPosts } from "../../lib/posts";
+
+const posts = sortPosts(await getCollection("blog", ({ data }) => !data.draft));
+---
+
+<BaseLayout title="Posts | Kenichi Lyon Blog">
+  <main class="article-layout">
+    <section class="article">
+      <p class="breadcrumbs">Posts</p>
+      <h1>文章索引</h1>
+      <div class="post-list compact">
+        {
+          posts.map((post) => (
+            <article class="post-card">
+              <div class="order">{String(post.data.order).padStart(2, "0")}</div>
+              <div>
+                <h2>
+                  <a href={postUrl(post)}>{post.data.title}</a>
+                </h2>
+                <p class="meta">{formatDate(post.data.date)} · {post.data.author}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</BaseLayout>

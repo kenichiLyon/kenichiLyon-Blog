@@ -1,0 +1,51 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, postUrl, sitePath, sortPosts } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = sortPosts(await getCollection("blog", ({ data }) => !data.draft));
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post, posts },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<"blog">;
+  posts: CollectionEntry<"blog">[];
+};
+
+const { post, posts } = Astro.props;
+const { Content } = await render(post);
+const index = posts.findIndex((item) => item.id === post.id);
+const previousPost = index > 0 ? posts[index - 1] : undefined;
+const nextPost = index >= 0 && index < posts.length - 1 ? posts[index + 1] : undefined;
+const crumbs = post.data.source.split("/").slice(0, -1).join(" / ");
+---
+
+<BaseLayout title={`${post.data.title} | Kenichi Lyon Blog`}>
+  <main class="article-layout">
+    <article class="article">
+      <p class="breadcrumbs">{crumbs}</p>
+      <h1>{post.data.title}</h1>
+      <p class="meta">
+        {formatDate(post.data.date)} · {post.data.author}
+        {post.data.series ? ` · ${post.data.series}` : ""}
+      </p>
+
+      <div class="article-body">
+        <Content />
+      </div>
+
+      <footer class="article-footer">
+        <p>{post.data.source}</p>
+        <nav aria-label="Post navigation">
+          {previousPost && <a href={postUrl(previousPost)}>上一篇</a>}
+          <a href={sitePath("/directory/")}>目录</a>
+          {nextPost && <a href={postUrl(nextPost)}>下一篇</a>}
+        </nav>
+      </footer>
+    </article>
+  </main>
+</BaseLayout>
