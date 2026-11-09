@@ -1,24 +1,26 @@
 {
   "name": "kenichilyon-blog",
-  "version": "1.0.0",
-  "description": "Astro static blog for Kenichi Lyon writing.",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "migrate:content": "node scripts/migrate-content.mjs",
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "astro": "^6.4.4",
-    "typescript": "^6.0.3",
-    "yaml": "^2.9.0"
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@nuxt/content": "^3.16.2",
+    "@nuxtjs/color-mode": "^4.1.0",
+    "better-sqlite3": "^13.0.3",
+    "nuxt": "^4.6.4",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9"
+    "@types/node": "^24.19.2",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.3.14"
   }
 }

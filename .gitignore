@@ -1,5 +1,8 @@
 node_modules/
-.astro/
-dist/
-site/
+.nuxt/
+.output/
+.data/
+/dist
+.env
 npm-debug.log*
+.DS_Store
